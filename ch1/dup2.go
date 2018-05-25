@@ -6,9 +6,14 @@ import (
 	"os"
 )
 
+func main() {
+	dup2()
+}
+
 func dup2() {
 	counts := make(map[string]int)
 	files := os.Args[1:]
+
 	if len(files) == 0 {
 		countLines(os.Stdin, counts)
 	} else {
@@ -18,7 +23,6 @@ func dup2() {
 				fmt.Println(err)
 				continue
 			}
-
 			countLines(f, counts)
 			f.Close()
 		}
@@ -26,7 +30,7 @@ func dup2() {
 
 	for line, n := range counts {
 		if n > 1 {
-			fmt.Printf("%d\t%s\n", n, line)
+			fmt.Printf("Exibido: %d\t%s\n", n, line)
 		}
 	}
 
@@ -34,6 +38,7 @@ func dup2() {
 
 func countLines(f *os.File, counts map[string]int) {
 	input := bufio.NewScanner(f)
+
 	for input.Scan() {
 		counts[input.Text()]++
 	}
