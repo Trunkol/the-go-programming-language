@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -17,6 +18,7 @@ func main() {
 		if err != nil {
 			os.Exit(1)
 		}
+		fmt.Println(resp.StatusCode)
 		io.Copy(os.Stdout, resp.Body)
 		resp.Body.Close()
 	}
