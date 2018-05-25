@@ -6,10 +6,6 @@ import (
 	"os"
 )
 
-func main() {
-	dup2()
-}
-
 func dup2() {
 	counts := make(map[string]int)
 	files := os.Args[1:]
@@ -18,6 +14,7 @@ func dup2() {
 		countLines(os.Stdin, counts)
 	} else {
 		for _, arg := range files {
+
 			f, err := os.Open(arg)
 			if err != nil {
 				fmt.Println(err)
