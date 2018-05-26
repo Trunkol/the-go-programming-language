@@ -6,11 +6,11 @@ import (
 	"net/http"
 )
 
-func main() {
-	http.HandleFunc("/", handler)
+func main1() {
+	http.HandleFunc("/", handler1)
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "URL.path = %q\n", r.URL.Path)
+func handler1(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "URL.path = %s\n", r.URL.Query().Get("cycles"))
 }

@@ -1,4 +1,4 @@
-/*
+//Final project of chapter using lissajous with httpserver
 package main
 
 import (
@@ -6,8 +6,11 @@ import (
 	"image/color"
 	"image/gif"
 	"io"
+	"log"
 	"math"
 	"math/rand"
+	"net/http"
+	"strconv"
 )
 
 var palette = []color.Color{color.White, color.Black}
@@ -18,9 +21,20 @@ const (
 
 )
 
-func lissajous(out io.Writer) {
+func main() {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		lissajous(w, r)
+	})
+
+	log.Fatal(http.ListenAndServe("localhost:8000", nil))
+
+}
+
+func lissajous(out io.Writer, r *http.Request) {
+	tmp, _ := strconv.Atoi(r.URL.Query().Get("cycles"))
+	cycles := float64(tmp)
+
 	const (
-		cycles  = 5
 		res     = 0.001
 		size    = 100
 		nframes = 64
