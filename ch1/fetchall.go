@@ -10,13 +10,14 @@ import (
 	"time"
 )
 
-func main() {
+func fetchall() {
 	start := time.Now()
 	ch := make(chan string)
 	for _, url := range os.Args[1:] {
 		if !strings.HasPrefix(url, "http://") {
 			url = "http://" + url
 		}
+
 		go fetch(url, ch)
 	}
 
