@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func dup1() {
+func main() {
 	counts := make(map[string]int)
 	input := bufio.NewScanner(os.Stdin)
 
@@ -14,7 +14,7 @@ func dup1() {
 		counts[input.Text()]++
 	}
 
-	for line, n := range counts {
+	for line, n := range counts {	
 		if n > 1 {
 			fmt.Printf("%d\t%s\n", n, line)
 		}
